@@ -8,6 +8,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _State extends State<HomePage> {
+
+  String text_ = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +32,72 @@ class _State extends State<HomePage> {
                         : ((j & 1 == 0) ? Colors.black : Colors.white),
                   )
               ],
-            )
+            ),
+          SizedBox(height: 10,),
+          Row(
+            children: [
+              Expanded(
+                  child: GestureDetector(
+                    onTap: (){
+                      setState(() {
+
+                        text_ = "Welcome";
+
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Container(
+                        height: 50,
+                        color: Colors.blue,
+                        child: Center(
+                          child: Text("Start",
+                          style: TextStyle(
+                            fontSize: 20,
+                          )
+                            ,),
+                        ),
+                      ),
+                    ),
+                  )
+
+              ),
+              Expanded(
+                  child: GestureDetector(
+                    onTap: (){
+                      setState(() {
+
+                        text_ = "Welcome";
+
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Container(
+                        height: 50,
+                        color: Colors.red,
+                        child: Center(
+                          child: Text("",
+                            style: TextStyle(
+                              fontSize: 20,
+                            )
+                            ,),
+                        ),
+                      ),
+                    ),
+                  )
+
+              ),
+            ],
+          ),
+
+          SizedBox(height: 20,),
+          Text(text_
+          ,style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+          )
         ],
       ),
     );
