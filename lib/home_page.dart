@@ -8,6 +8,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _State extends State<HomePage> {
+  String text_ = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,18 +32,8 @@ class _State extends State<HomePage> {
               ],
             ),
 
-          GestureDetector(
-            child: Container(
-              height: 60,
-              width: 140,
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(child: Text("Exit", style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold))),
-            ),
-          ),
-            ),
+
+
           SizedBox(height: 10,),
           Row(
             children: [
@@ -59,7 +50,11 @@ class _State extends State<HomePage> {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Container(
                         height: 50,
-                        color: Colors.blue,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+
                         child: Center(
                           child: Text("Start",
                           style: TextStyle(
@@ -73,29 +68,25 @@ class _State extends State<HomePage> {
 
               ),
               Expanded(
-                  child: GestureDetector(
-                    onTap: (){
-                      setState(() {
-
-                        text_ = "Welcome";
-
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Container(
-                        height: 50,
+                child: GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      text_ = "Thank u";
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
                         color: Colors.red,
-                        child: Center(
-                          child: Text("",
-                            style: TextStyle(
-                              fontSize: 20,
-                            )
-                            ,),
-                        ),
+                        borderRadius: BorderRadius.circular(10),
                       ),
+                      child: Center(child: Text("Exit", style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold))),
                     ),
-                  )
+                  ),
+                ),
+
 
               ),
             ],
@@ -103,11 +94,12 @@ class _State extends State<HomePage> {
 
           SizedBox(height: 20,),
           Text(text_
-          ,style: TextStyle(
+            ,style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
             ),
           )
+
         ],
       ),
     );
