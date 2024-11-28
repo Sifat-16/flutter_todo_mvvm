@@ -8,9 +8,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _State extends State<HomePage> {
-
-  String text_ = "";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +29,19 @@ class _State extends State<HomePage> {
                         : ((j & 1 == 0) ? Colors.black : Colors.white),
                   )
               ],
+            ),
+
+          GestureDetector(
+            child: Container(
+              height: 60,
+              width: 140,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(child: Text("Exit", style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold))),
+            ),
+          ),
             ),
           SizedBox(height: 10,),
           Row(
