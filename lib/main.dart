@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_mvvm/page1.dart';
 
 void main() {
   runApp(const MyApp());
