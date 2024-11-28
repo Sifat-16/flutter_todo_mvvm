@@ -50,20 +50,28 @@ class _MyHomePageState extends State<MyHomePage> {
 
       ),
 
-      body: Column(
-       children: [
-         for(int i = 1;i<=8;i++)
-           Row(
-             children: [
-               for(int j = 1;j<=8;j++)
-                 Container(
-                   height: MediaQuery.of(context).size.width/8,
-                   width: MediaQuery.of(context).size.width/8,
-                     color: (i&1==1)? ((j&1 ==1)? Colors.black:Colors.white)  : ((j&1 ==0)? Colors.black:Colors.white) ,
-                 )
-             ],
-           )
-       ],
+      body: Padding(
+        padding: const EdgeInsets.all(2),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.blueGrey,
+          ),
+          child: Column(
+           children: [
+             for(int i = 1;i<=8;i++)
+               Row(
+                 children: [
+                   for(int j = 1;j<=8;j++)
+                     Container(
+                       height: MediaQuery.of(context).size.width/10,
+                       width: MediaQuery.of(context).size.width/10,
+                         color: (i&1==1)? ((j&1 ==1)? Colors.black:Colors.white)  : ((j&1 ==0)? Colors.black:Colors.white) ,
+                     )
+                 ],
+               )
+           ],
+          ),
+        ),
       ),
 
     );
