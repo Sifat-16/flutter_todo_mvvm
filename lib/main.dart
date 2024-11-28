@@ -29,14 +29,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -55,6 +47,23 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
 
         title: Text(widget.title),
+
+      ),
+
+      body: Column(
+       children: [
+         for(int i = 1;i<=8;i++)
+           Row(
+             children: [
+               for(int j = 1;j<=8;j++)
+                 Container(
+                   height: MediaQuery.of(context).size.width/8,
+                   width: MediaQuery.of(context).size.width/8,
+                     color: (i&1==1)? ((j&1 ==1)? Colors.black:Colors.white)  : ((j&1 ==0)? Colors.black:Colors.white) ,
+                 )
+             ],
+           )
+       ],
       ),
 
     );
