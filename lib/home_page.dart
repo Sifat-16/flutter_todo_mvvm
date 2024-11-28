@@ -50,6 +50,7 @@ class _State extends State<HomePage> {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Container(
                         height: 50,
+
                         decoration: BoxDecoration(
                           color: Colors.blue,
                           borderRadius: BorderRadius.circular(10),
