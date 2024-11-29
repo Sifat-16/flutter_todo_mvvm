@@ -36,10 +36,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           actions: <Widget>[
             ElevatedButton(
-              child: const Text(
-                'Cancel',
-                style: TextStyle(color: Colors.red),
-              ),
+              child: const Text('Cancel', style: TextStyle(color: Colors.red),),
               onPressed: () {
                 chosenColor = null;
                 Navigator.pop(context);
@@ -57,12 +54,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
 
     if (chosenColor != null) {
-      ref
-          .read(homeProvider.notifier)
-          .updateColor(hexColor: chosenColor!.toHexString(), index: index);
+      ref.read(homeProvider.notifier).updateColor(hexColor: chosenColor!.toHexString(), index: index);
     }
 
     print("Chosen color ${chosenColor?.toHexString()}");
+  }
+
+  FocusNode _focusNode = FocusNode();
+  @override
+  void dispose() {
+    _focusNode.dispose(); // Clean up the focus node when the widget is disposed
+    super.dispose();
   }
 
   @override
@@ -80,19 +82,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               controller: todoAddController,
               maxLines: 4,
               minLines: 1,
+              focusNode: _focusNode,
               decoration: InputDecoration(
                   suffixIcon: IconButton(
                       onPressed: () {
-                        ref
-                            .read(homeProvider.notifier)
-                            .addTodo(title: todoAddController.text.trim());
+                        ref.read(homeProvider.notifier).addTodo(title: todoAddController.text.trim());
                         todoAddController.clear();
-                        showTodoColorDialog(
-                            index: ref.read(homeProvider).todos.length - 1);
+                        showTodoColorDialog(index: ref.read(homeProvider).todos.length - 1);
+                        _focusNode.unfocus();
                       },
-                      icon: Icon(Icons.send)),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20))),
+                      icon: Icon(Icons.send)
+                  ),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+              ),
             ),
             Expanded(
               child: ListView.builder(
@@ -102,17 +104,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       leading: Checkbox(
                           value: home.todos[index].isSelected,
                           onChanged: (b) {
-                            ref.read(homeProvider.notifier).toggleSelected(
-                                selected: b ?? false, index: index);
-                          }),
-                      title: Text(
-                        "${home.todos[index].title}",
+                            ref.read(homeProvider.notifier).toggleSelected(selected: b ?? false, index: index);
+                          }
+                      ),
+                      title: Text("${home.todos[index].title}",
                         style: TextStyle(
                             color: home.todos[index].hexColor == null
-                                ? null
-                                : Color(colorExtractor(
-                                    colorString:
-                                        home.todos[index].hexColor ?? ""))),
+                                ? null : Color(colorExtractor(colorString: home.todos[index].hexColor ?? ""))
+                        ),
                       ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -121,14 +120,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               onPressed: () async {
                                 showTodoColorDialog(index: index);
                               },
-                              icon: Icon(Icons.color_lens_sharp)),
+                              icon: Icon(Icons.color_lens_sharp)
+                          ),
                           IconButton(
                               onPressed: () {
-                                ref
-                                    .read(homeProvider.notifier)
-                                    .deleteTodo(index: index);
+                                ref.read(homeProvider.notifier).deleteTodo(index: index);
                               },
-                              icon: Icon(Icons.delete)),
+                              icon: Icon(Icons.delete)
+                          ),
                         ],
                       ),
                     );
