@@ -8,7 +8,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _State extends State<HomePage> {
-  String text_ = "";
+  String text_ = "New Project";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +87,6 @@ class _State extends State<HomePage> {
                     ),
                   ),
                 ),
-
 
               ),
             ],
