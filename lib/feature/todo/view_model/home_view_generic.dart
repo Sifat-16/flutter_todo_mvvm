@@ -12,7 +12,12 @@ class HomeViewGeneric {
       this.pickerColor = const Color(0xff443a49)});
 
   HomeViewGeneric update(
-      {List<TodoModel>? todos, bool? isLoading, Color? pickerColor}) {
+      {
+        List<TodoModel>? todos,
+        bool? isLoading,
+        Color? pickerColor
+      }
+      ) {
     return HomeViewGeneric(
         todos: todos ?? this.todos,
         isLoading: isLoading ?? this.isLoading,

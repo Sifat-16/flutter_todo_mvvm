@@ -17,6 +17,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return int.parse(colorString, radix: 16);
   }
 
+/*
   void showTodoColorDialog({required int index}) async {
     Color? chosenColor;
     // raise the [showDialog] widget
@@ -65,6 +66,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     print("Chosen color ${chosenColor?.toHexString()}");
   }
 
+
+  */
+
   @override
   Widget build(BuildContext context) {
     final home = ref.watch(homeProvider);
@@ -81,18 +85,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               maxLines: 4,
               minLines: 1,
               decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        ref
-                            .read(homeProvider.notifier)
-                            .addTodo(title: todoAddController.text.trim());
-                        todoAddController.clear();
-                        showTodoColorDialog(
-                            index: ref.read(homeProvider).todos.length - 1);
-                      },
-                      icon: Icon(Icons.send)),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20))),
+
+                /// ================================================================================
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    ref.read(homeProvider.notifier).addTodo(title: todoAddController.text.trim());
+                    todoAddController.clear();
+                    //  showTodoColorDialog(
+                    //      index: ref.read(homeProvider).todos.length - 1);
+                  },
+                  icon: Icon(Icons.send),
+                ),
+                /// ===================================================================================
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
             ),
             Expanded(
               child: ListView.builder(
@@ -119,7 +127,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         children: [
                           IconButton(
                               onPressed: () async {
-                                showTodoColorDialog(index: index);
+                                //  showTodoColorDialog(index: index);
                               },
                               icon: Icon(Icons.color_lens_sharp)),
                           IconButton(
