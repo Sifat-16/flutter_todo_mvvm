@@ -18,53 +18,53 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return int.parse(colorString, radix: 16);
   }
 
-  // void showTodoColorDialog({required int index}) async {
-  //   Color? chosenColor;
-  //   // raise the [showDialog] widget
-  //   await showDialog(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         title: const Text('Pick a color!'),
-  //         content: SingleChildScrollView(
-  //           child: ColorPicker(
-  //             pickerColor: ref.read(homeProvider).pickerColor,
-  //             onColorChanged: (Color color) {
-  //               chosenColor = color;
-  //             },
-  //           ),
-  //         ),
-  //         actions: <Widget>[
-  //           ElevatedButton(
-  //             child: const Text(
-  //               'Cancel',
-  //               style: TextStyle(color: Colors.red),
-  //             ),
-  //             onPressed: () {
-  //               chosenColor = null;
-  //               Navigator.pop(context);
-  //             },
-  //           ),
-  //           ElevatedButton(
-  //             child: const Text('Confirm'),
-  //             onPressed: () {
-  //               Navigator.pop(context);
-  //             },
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  //
-  //   if (chosenColor != null) {
-  //     ref
-  //         .read(homeProvider.notifier)
-  //         .updateColor(hexColor: chosenColor!.toHexString(), index: index);
-  //   }
-  //
-  //   print("Chosen color ${chosenColor?.toHexString()}");
-  // }
+  void showTodoColorDialog({required int index}) async {
+    Color? chosenColor;
+    // raise the [showDialog] widget
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Pick a color!'),
+          content: SingleChildScrollView(
+            child: ColorPicker(
+              pickerColor: ref.read(homeProvider).pickerColor,
+              onColorChanged: (Color color) {
+                chosenColor = color;
+              },
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Colors.red),
+              ),
+              onPressed: () {
+                chosenColor = null;
+                Navigator.pop(context);
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Confirm'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+
+    if (chosenColor != null) {
+      ref
+          .read(homeProvider.notifier)
+          .updateColor(hexColor: chosenColor!.toHexString(), index: index);
+    }
+
+    print("Chosen color ${chosenColor?.toHexString()}");
+  }
 
   @override
   Widget build(BuildContext context) {
