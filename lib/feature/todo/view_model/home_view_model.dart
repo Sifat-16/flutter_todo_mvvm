@@ -8,9 +8,15 @@ final homeProvider = StateNotifierProvider<HomeController, HomeViewGeneric>(
 class HomeController extends StateNotifier<HomeViewGeneric> {
   HomeController() : super(HomeViewGeneric());
 
-  addTodo({required String title}) {
+  addTodo({required String title}) async {
     TodoModel newTodoModel = TodoModel(title: title);
-    List<TodoModel> todos = [...state.todos, newTodoModel];
+    await TodoProvider.insert(newTodoModel);
+    // List<TodoModel> todos = [...state.todos, newTodoModel];
+    getTodo();
+  }
+
+  getTodo() async {
+    List<TodoModel> todos = await TodoProvider.getAllTodo();
     state = state.update(todos: todos);
   }
 

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_todo_mvvm/config/database/local/sqflite_database_helper.dart';
 import 'package:flutter_todo_mvvm/feature/todo/view/screens/home_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SqfliteDatabaseHelper.database;
+
   runApp(ProviderScope(child: const MyApp()));
 }
 

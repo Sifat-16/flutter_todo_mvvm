@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_todo_mvvm/feature/todo/model/todo_model.dart';
 import 'package:flutter_todo_mvvm/feature/todo/view_model/home_view_model.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -66,6 +67,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    WidgetsBinding.instance.addPostFrameCallback((t) {
+      ref.read(homeProvider.notifier).getTodo();
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final home = ref.watch(homeProvider);
     return Scaffold(
@@ -83,6 +93,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               decoration: InputDecoration(
                   suffixIcon: IconButton(
                       onPressed: () {
+                        if (todoAddController.text.isEmpty) {
+                          TodoProvider.getAllTodo();
+                          return;
+                        }
                         ref
                             .read(homeProvider.notifier)
                             .addTodo(title: todoAddController.text.trim());
