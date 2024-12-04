@@ -14,10 +14,11 @@ class SearchScreen extends ConsumerStatefulWidget {
 class _SearchScreenState extends ConsumerState<SearchScreen> {
 
   TextEditingController todoAddController = TextEditingController();
+  Color? chosenColor;
 
   void showTodoColorDialog({required int index}) async {
 
-    Color? chosenColor;
+
     // raise the [showDialog] widget
     await showDialog(
       context: context,
@@ -57,9 +58,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     );
 
     if (chosenColor != null) {
-      ref
-          .read(homeProvider.notifier)
-          .updateColor(hexColor: chosenColor!.toHexString(), index: index);
+      ref.read(homeProvider.notifier).updatetodo(hexColor: chosenColor!.toHexString(), index: index,);
     }
 
     print("Chosen color ${chosenColor?.toHexString()}");
@@ -80,20 +79,20 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             maxLines: 4,
             minLines: 1,
             decoration: InputDecoration(
-              /// ================================================================================
+              /// ======================
               suffixIcon: IconButton(
                 onPressed: () {
-                  ref
-                      .read(homeProvider.notifier)
-                      .addTodo(title: todoAddController.text.trim());
-                  todoAddController.clear();
                   showTodoColorDialog(
-                      index: ref.read(homeProvider).todos.length - 1);
+                      index: ref.read(homeProvider).todos.length );
+
+                  ref.read(homeProvider.notifier).addTodo(title: todoAddController.text.trim(),hexcolor: chosenColor!.toHexString());
+                  todoAddController.clear();
+
                 },
                 icon: Icon(Icons.send),
               ),
 
-              /// ===================================================================================
+              /// ==============================
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
