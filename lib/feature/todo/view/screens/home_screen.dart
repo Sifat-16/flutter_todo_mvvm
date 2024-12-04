@@ -12,14 +12,15 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  Color? chosenColor;
   TextEditingController todoAddController = TextEditingController();
 
   int colorExtractor({required String colorString}) {
     return int.parse(colorString, radix: 16);
   }
 
-  void showTodoColorDialog({required int index}) async {
-    Color? chosenColor;
+  showTodoColorDialog({required int index}) async {
+
     // raise the [showDialog] widget
     await showDialog(
       context: context,
@@ -58,9 +59,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
 
     if (chosenColor != null) {
-      ref
-          .read(homeProvider.notifier)
-          .updateColor(hexColor: chosenColor!.toHexString(), index: index);
+      ref.read(homeProvider.notifier).updatetodo(hexColor: chosenColor!.toHexString(), index: index);
     }
 
     print("Chosen color ${chosenColor?.toHexString()}");
@@ -81,6 +80,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Todo Home"),
+        actions: [Icon(Icons.add_box)],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
@@ -92,17 +92,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               minLines: 1,
               decoration: InputDecoration(
                   suffixIcon: IconButton(
-                      onPressed: () {
+                      onPressed: () async{
                         if (todoAddController.text.isEmpty) {
                           TodoProvider.getAllTodo();
                           return;
                         }
-                        ref
-                            .read(homeProvider.notifier)
-                            .addTodo(title: todoAddController.text.trim());
+                        await showTodoColorDialog (
+                            index: ref.read(homeProvider).todos.length );
+
+                        ref.read(homeProvider.notifier).addTodo(title: todoAddController.text.trim(), hexcolor: chosenColor!.toHexString());
                         todoAddController.clear();
-                        showTodoColorDialog(
-                            index: ref.read(homeProvider).todos.length - 1);
+
                       },
                       icon: Icon(Icons.send)),
                   border: OutlineInputBorder(
@@ -112,38 +112,41 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               child: ListView.builder(
                   itemCount: home.todos.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: Checkbox(
-                          value: home.todos[index].isSelected,
-                          onChanged: (b) {
-                            ref.read(homeProvider.notifier).toggleSelected(
-                                selected: b ?? false, index: index);
-                          }),
-                      title: Text(
-                        "${home.todos[index].title}",
-                        style: TextStyle(
-                            color: home.todos[index].hexColor == null
-                                ? null
-                                : Color(colorExtractor(
-                                    colorString:
-                                        home.todos[index].hexColor ?? ""))),
-                      ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                              onPressed: () async {
-                                showTodoColorDialog(index: index);
-                              },
-                              icon: Icon(Icons.color_lens_sharp)),
-                          IconButton(
-                              onPressed: () {
-                                ref
-                                    .read(homeProvider.notifier)
-                                    .deleteTodo(index: index);
-                              },
-                              icon: Icon(Icons.delete)),
-                        ],
+                    return Card(
+                      child: ListTile(
+                        leading: Checkbox(
+                            value: home.todos[index].isSelected,
+                            onChanged: (b) {
+                              ref.read(homeProvider.notifier).toggleSelected(
+                                  selected: b ?? false, index: index);
+                            }),
+                        title: Text(
+                          "${home.todos[index].title}",
+                          style: TextStyle(
+                              color: home.todos[index].hexColor == null
+                                  ? null
+                                  : Color(colorExtractor(
+                                      colorString:
+                                          home.todos[index].hexColor ?? ""))),
+                        ),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                                onPressed: () async {
+                                  showTodoColorDialog(index: index);
+                                },
+
+                                icon: Icon(Icons.color_lens_sharp)),
+                            IconButton(
+                                onPressed: () {
+                                  ref
+                                      .read(homeProvider.notifier)
+                                      .deleteTodo(index: index);
+                                },
+                                icon: Icon(Icons.delete)),
+                          ],
+                        ),
                       ),
                     );
                   }),
