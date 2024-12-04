@@ -1,3 +1,6 @@
+import 'package:flutter_todo_mvvm/config/database/local/database_helper.dart';
+import 'package:sqflite/sqlite_api.dart';
+
 class TodoModel {
   int? id;
   String title;
@@ -23,5 +26,37 @@ class TodoModel {
       isSelected: map['isSelected'] == 1, // Convert int to bool
       hexColor: map['hexColor'] as String?,
     );
+  }
+}
+
+class todoProvider1{
+
+  static const String createTable = '''
+      CREATE TABLE todoInfo (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        isSelected INTEGER NOT NULL DEFAULT 0,
+        hexColor TEXT
+      )
+    ''';
+
+  static Future<int> insertUser(TodoModel user) async {
+    Database db = await DatabaseHelper.db;
+    return await db.insert('todoInfo', user.toMap());
+  }
+
+  static Future<List<Map<String, dynamic>>> queryAllUsers() async {
+    Database db = await DatabaseHelper.db;
+    return await db.query('todoInfo');
+  }
+
+  static Future<int> updateUser(TodoModel user) async {
+    Database db = await DatabaseHelper.db;
+    return await db.update('todoInfo', user.toMap(), where: 'id = ?', whereArgs: [user.id]);
+  }
+
+  static Future<int> deleteUser(TodoModel user) async {
+    Database db = await DatabaseHelper.db;
+    return await db.delete('todoInfo', where: 'id = ?', whereArgs: [user.id]);
   }
 }

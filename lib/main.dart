@@ -5,7 +5,7 @@ import 'package:flutter_todo_mvvm/feature/todo/view/screens/home_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await DatabaseHelper.instance.initDb();
+  await DatabaseHelper.db;
   runApp(ProviderScope(child: const MyApp()));
 }
 

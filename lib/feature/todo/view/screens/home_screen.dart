@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_todo_mvvm/feature/todo/view/category_screen/home_category.dart';
 import 'package:flutter_todo_mvvm/feature/todo/view/screens/new_todo_add.dart';
 import 'package:flutter_todo_mvvm/feature/todo/view/screens/search.dart';
 import 'package:flutter_todo_mvvm/feature/todo/view/screens/update_todo.dart';
@@ -91,7 +92,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 print("Search icon working");
               }
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 15.0),
+            child: GestureDetector(
+                child: Icon(Icons.category, size: 32, color: Colors.orangeAccent),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeCategory()));
+                  print("Category icon working");
+                }
+            ),
+          ),
         ],
       ),
       // body: Padding(
