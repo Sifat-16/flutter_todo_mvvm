@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_todo_mvvm/feature/todo/model/todo_model.dart';
+import 'package:flutter_todo_mvvm/feature/todo/view/screens/category_screen.dart';
 import 'package:flutter_todo_mvvm/feature/todo/view_model/home_view_model.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -80,7 +81,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Todo Home"),
-        actions: [Icon(Icons.add_box)],
+        actions: [GestureDetector(
+          onTap: (){
+            Navigator.push(context,
+            MaterialPageRoute(
+                builder: (context) => CategoryScreen(),
+            )
+            );
+          },
+            child: Icon(Icons.add_box)
+        )
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),

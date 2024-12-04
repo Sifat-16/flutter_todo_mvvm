@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 class SqfliteDatabaseHelper {
   static final _databaseName = "todo_mvvm.db";
-  static final _databaseVersion = 2;
+  static final _databaseVersion = 4;
   static Database? _database;
 
   static Future<Database> get database async {
@@ -24,6 +24,14 @@ class SqfliteDatabaseHelper {
         print("Creating todo table");
         await db.execute(TodoProvider.createTodoTableQuery);
       }
+      if(newVersion ==4){
+        print("Dropping category table");
+        await db.execute(CategoryProvider.dropCategoryTableQuery);
+        print("Creating category table");
+        await db.execute(CategoryProvider.createCategoryTableQuery);
+
+      }
+
     });
   }
 }

@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo_mvvm/feature/todo/model/todo_model.dart';
 
 class HomeViewGeneric {
-  bool isLoading;
+ // bool isLoading;
   List<TodoModel> todos;
   Color pickerColor;
 
   HomeViewGeneric(
       {this.todos = const [],
-      this.isLoading = false,
-      this.pickerColor = const Color(0xff443a49)});
+     // this.isLoading = false,
+      this.pickerColor = const Color(0xff443a49)
+      }
+      );
 
   HomeViewGeneric update(
       {
@@ -20,7 +22,32 @@ class HomeViewGeneric {
       ) {
     return HomeViewGeneric(
         todos: todos ?? this.todos,
-        isLoading: isLoading ?? this.isLoading,
+       // isLoading: isLoading ?? this.isLoading,
         pickerColor: pickerColor ?? this.pickerColor);
   }
 }
+
+
+class CategoryViewGeneric {
+  // bool isLoading;
+  List<CategoryModel> categories;
+
+
+  CategoryViewGeneric(
+      {
+        this.categories = const [],
+      }
+      );
+
+  CategoryViewGeneric update(
+      {
+        List<CategoryModel>? categories,
+      }
+      ) {
+    return CategoryViewGeneric(
+      categories: categories ?? this.categories,
+
+    );
+  }
+}
+

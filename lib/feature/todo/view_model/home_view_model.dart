@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_todo_mvvm/feature/todo/model/todo_model.dart';
 import 'package:flutter_todo_mvvm/feature/todo/view_model/home_view_generic.dart';
@@ -56,4 +57,33 @@ class HomeController extends StateNotifier<HomeViewGeneric> {
   }
 }
 
+
+
+
+
+
+final categoryProvider = StateNotifierProvider<CategoryController, CategoryViewGeneric>(
+        (ref) => CategoryController());
+
+class CategoryController extends StateNotifier<CategoryViewGeneric> {
+  CategoryController() : super(CategoryViewGeneric());
+
+  addCategory({required String title}) async {
+    CategoryModel newCategoryModel = CategoryModel(title: title,);
+    /// TodoModel newTodoModel = TodoModel(title: title);
+    await CategoryProvider.insert(newCategoryModel);
+    // List<TodoModel> todos = [...state.todos, newTodoModel];
+    getCategory();
+  }
+
+
+
+  getCategory() async {
+    List<CategoryModel> categories = await CategoryProvider.getAllCategory();
+    state = state.update(categories: categories);
+
+  }
+
+
+}
 
