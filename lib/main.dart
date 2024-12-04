@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_todo_mvvm/config/database/local/sqflite_database_helper.dart';
 import 'package:flutter_todo_mvvm/feature/todo/view/screens/home_screen.dart';
-//import 'package:sqflite/sqflite.dart';
 
-///void main() {
-///========
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await SqfliteDatabaseHelper.database;
-  ///==========
+
   runApp(ProviderScope(child: const MyApp()));
 }
 
@@ -18,9 +17,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, home: HomeScreen());
   }
 }
