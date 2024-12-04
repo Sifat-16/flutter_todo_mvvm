@@ -14,6 +14,14 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ref.read(homeProvider.notifier).todoInitialize();
+  }
+
   TextEditingController todoAddController = TextEditingController();
 
   int colorExtractor({required String colorString}) {
@@ -178,8 +186,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     Icons.ac_unit
                   ),
                 ),
-                title: Text("Rayhan Chowdhury"),
-                subtitle: Text("Software Engineer"),
+                title: Text("Title"),
+                subtitle: Text("Subtitle"),
                 trailing: Icon(
                   Icons.add,
                 ),
@@ -204,7 +212,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   itemCount: home.todos.length,
                   itemBuilder: (context, index){
                     return GestureDetector(
-                      onTap: (){
+                      onTap: (){print(home.todos[index].hexColor);
                         // Navigate to the "Add New Item" screen
                         Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateTodo(currentIndex: index)),);
                         print("Container Working");

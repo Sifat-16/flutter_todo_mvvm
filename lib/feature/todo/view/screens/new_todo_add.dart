@@ -55,9 +55,11 @@ class _NewTodoAddState extends ConsumerState<NewTodoAdd> {
     );
 
     if (chosenColor != null) {
-      ref
-          .read(homeProvider.notifier)
-          .updateColor(hexColor: chosenColor!.toHexString(), index: index);
+      ref.read(homeProvider.notifier).updateColor(hexColor: chosenColor!.toHexString(), index: index);
+      print("if: ${ref.watch(homeProvider).todos[index].hexColor}");
+      print("if ${ref.watch(homeProvider).todos[index].title}");
+    } else{
+      print("else : ${ref.watch(homeProvider).todos[index].hexColor}");
     }
 
     print("Chosen color ${chosenColor?.toHexString()}");
@@ -87,8 +89,12 @@ class _NewTodoAddState extends ConsumerState<NewTodoAdd> {
             decoration: InputDecoration(
               suffixIcon: IconButton(
                   onPressed: () async {
-                    ref.read(homeProvider.notifier).addTodo(title: todoAddController.text.trim());
+                    await ref.read(homeProvider.notifier).addTodo(title: todoAddController.text.trim());
                     todoAddController.clear();
+
+                    print("length = ${ref.read(homeProvider).todos.length}");
+                    print("Current ttt = ${ref.read(homeProvider).todos[ref.read(homeProvider).todos.length - 1]}");
+
                     await showTodoColorDialog(index: ref.read(homeProvider).todos.length - 1);
                     //ColorSelect cur = ColorSelect(ctx: context, pickedColor: ref.read(homeProvider).pickerColor,);
                     //await cur.showTodoColorDialog(index: ref.read(homeProvider).todos.length - 1);

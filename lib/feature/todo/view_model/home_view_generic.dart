@@ -12,6 +12,7 @@ class HomeViewGeneric {
     return HomeViewGeneric(
         todos: todos ?? this.todos,
         isLoading: isLoading ?? this.isLoading,
-        pickerColor: pickerColor ?? this.pickerColor);
+        pickerColor: pickerColor ?? this.pickerColor
+    );
   }
 }
