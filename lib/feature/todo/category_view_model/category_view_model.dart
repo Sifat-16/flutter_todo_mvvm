@@ -29,9 +29,11 @@ class CategoryController extends StateNotifier<CategoryViewGenerics> {
     state = state.update(todos: todos1);
   }
 
-  updateText({required String editTitle, required int index}) async{
+  updateText({required int index, required String title, required String? importance, required String? description}) async{
     List<TodoCategoryModel> todos1 = state.categoryTodo;
-    todos1[index].title = editTitle;
+    todos1[index].title = title;
+    todos1[index].importance = importance;
+    todos1[index].description = description;
     state = state.update(todos: todos1);
     await todoProvider2.updateUser(todos1[index]);
   }

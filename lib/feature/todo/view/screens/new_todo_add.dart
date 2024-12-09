@@ -2,9 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_todo_mvvm/feature/todo/view/screens/pracice/color_select.dart';
-import 'package:flutter_todo_mvvm/feature/todo/view/screens/home_screen.dart';
-
 import '../../view_model/home_view_model.dart';
 
 class NewTodoAdd extends ConsumerStatefulWidget {

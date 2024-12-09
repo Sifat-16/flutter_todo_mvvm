@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_todo_mvvm/feature/todo/category_view_model/category_view_model.dart';
 import 'package:flutter_todo_mvvm/feature/todo/view/category_screen/add_categories.dart';
+import 'package:flutter_todo_mvvm/feature/todo/view/category_screen/update_category_todo.dart';
 
 class HomeCategory extends ConsumerStatefulWidget {
   const HomeCategory({super.key});
@@ -49,7 +50,7 @@ class _HomeCategoryState extends ConsumerState<HomeCategory> {
                           IconButton(
                             onPressed: (){
                               // Navigate to the "Add New Item" screen
-                              //.push(context, MaterialPageRoute(builder: (context) => UpdateTodo(currentIndex: index)),);
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateCategoryTodo(currentIndex: index)),);
                             },
                             icon: Icon(Icons.edit_note_outlined, size: 35),
                           ),
